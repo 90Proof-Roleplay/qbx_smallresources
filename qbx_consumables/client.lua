@@ -406,9 +406,35 @@ RegisterNetEvent('consumables:client:UseJoint', function()
         local used = lib.callback.await('consumables:server:usedItem', false, 'joint')
         if not used then return end
 
-        exports.scully_emotemenu:playEmoteByCommand('joint')
+        exports.scully_emotemenu:playEmoteByCommand('smoke8')
         TriggerEvent('evidence:client:SetStatus', 'weedsmell', 300)
+        TriggerEvent('evidence:client:SetStatus', 'redeyes', 300)
         smokeWeed()
+        smokingWeed = true
+    else -- if canceled
+        exports.qbx_core:Notify(locale('error.canceled'), 'error')
+    end
+end)
+
+RegisterNetEvent('consumables:client:UseCig', function()
+    if lib.progressBar({
+        duration = 1500,
+        label = locale('progress.lighting_cig'),
+        useWhileDead = false,
+        canCancel = true,
+        disable = {
+            move = false,
+            car = false,
+            mouse = false,
+            combat = true
+        }
+    }) then -- if completed
+        local used = lib.callback.await('consumables:server:usedItem', false, 'cigarette')
+        if not used then return end
+
+        exports.scully_emotemenu:playEmoteByCommand('smoke5')
+        TriggerEvent('evidence:client:SetStatus', 'cigsmoke', 300)
+        TriggerServerEvent('hud:server:RelieveStress', math.random(3, 6))
     else -- if canceled
         exports.qbx_core:Notify(locale('error.canceled'), 'error')
     end

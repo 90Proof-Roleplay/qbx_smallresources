@@ -112,6 +112,10 @@ exports.qbx_core:CreateUseableItem('joint', function(source)
     TriggerClientEvent('consumables:client:UseJoint', source)
 end)
 
+exports.qbx_core:CreateUseableItem('cigarette', function(source)
+    TriggerClientEvent('consumables:client:UseCig', source)
+end)
+
 exports.qbx_core:CreateUseableItem('cokebaggy', function(source)
     TriggerClientEvent('consumables:client:Cokebaggy', source)
 end)
